@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  pocketbase:
+    build: .
+    container_name: pocketbase-server
+    ports:
+      - "8080:8080"
+    volumes:
+      # Mount pb_data for persistence
+      - ./pb_data:/app/pb_data
+    environment:
+      # Optional: Set environment variables
+      - TZ=Asia/Jakarta
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:8080/api/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
