@@ -1,6 +1,6 @@
 // src/components/tables/ScheduleRowEditor.tsx
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { TableRow, TableCell } from "@/components/ui/table";
 import { Input } from "@/components/ui/input";
@@ -23,11 +23,11 @@ import { format } from "date-fns";
 import { toast } from "sonner";
 
 import { type StudentsResponse, type RecordIdString } from "@/types/pocketbase";
-import { type NewSchedulePayload } from "@/hooks/use-finale-examination-data";
+import { type FinaleSchedulePayload } from "@/hooks/use-finale-examination-data";
 
 interface ScheduleRowEditorProps {
   allStudents: StudentsResponse[];
-  onSave: (payload: NewSchedulePayload) => Promise<RecordIdString | null>;
+  onSave: (payload: FinaleSchedulePayload) => Promise<RecordIdString | null>;
   onCancel: () => void;
 }
 
@@ -51,7 +51,7 @@ export function ScheduleRowEditor({
       return;
     }
 
-    const payload: NewSchedulePayload = {
+    const payload: FinaleSchedulePayload = {
       date: date.toISOString().split("T")[0], // YYYY-MM-DD
       start_time: `${startTime}:00`, // HH:MM:00
       end_time: `${endTime}:00`, // HH:MM:00

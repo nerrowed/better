@@ -1,20 +1,23 @@
 # Ignore unnecessary files to reduce Docker image size
 *.exe
-*.md
 .git
 .gitignore
 node_modules
 npm-debug.log
 
-# Keep these important directories
+# Keep these important directories (only those that exist)
 !pb_data
 !pb_migrations
-!pb_hooks
-!pb_public
 
-# Ignore backup files
+# Ignore large files to reduce image size
 pb_data/backups/*
 pb_data/storage/*
 
 # Ignore logs
 *.log
+
+# Ignore documentation (optional, uncomment if you want smaller image)
+# *.md
+# README*.md
+# CHANGELOG.md
+# LICENSE.md
