@@ -19,12 +19,17 @@ RUN wget https://github.com/pocketbase/pocketbase/releases/download/v${PB_VERSIO
     && chmod +x pocketbase
 
 # Copy existing PocketBase data and migrations
+# Only copy pb_data (database) and pb_migrations (schema)
 COPY pb_data ./pb_data
 COPY pb_migrations ./pb_migrations
-COPY pb_hooks ./pb_hooks
+
+# Copy pb_hooks if exists (optional for custom logic)
+# Create empty directory if not exists
+RUN mkdir -p ./pb_hooks
 
 # Copy public files (frontend build if using PocketBase as full-stack)
-# If you want to serve frontend from PocketBase
+# Uncomment if you want to serve frontend from PocketBase
+# RUN mkdir -p ./pb_public
 # COPY pb_public ./pb_public
 
 # Create volume for data persistence
